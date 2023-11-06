@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../../models/User");
+const User = require("../models/User");
 
 //VALIDATION OF USER INPUTS PREREQUISITES
 const Joi = require("@hapi/joi");
@@ -83,8 +83,8 @@ router.post("/login", async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
     else {
       //SENDING BACK THE TOKEN
-      const token = jwt.sign({ _id: user._id }, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
-      res.header("auth-token", token).send(token);
+      const userdata = { "token": jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET), user };
+      res.header("auth-token", userdata.token).send(userdata);
     }
   } catch (error) {
     res.status(500).send(error);
