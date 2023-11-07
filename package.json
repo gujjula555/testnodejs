@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
-    "dev": "nodemon index.js",
-     "build": "netlify deploy --prod"
+    "dev": "nodemon index.js"
   },
   "author": "Shelcia",
   "license": "MIT",
